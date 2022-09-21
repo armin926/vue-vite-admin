@@ -8,6 +8,7 @@ import Breadcrumb from '@/components/Breadcrumb/index.vue';
 import LangSelect from '@/components/LangSelect/index.vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from '@/hooks/useI18n'
+import ThemeSelect from '@/components/ThemeSelect/index.vue';
 
 
 const useStore = useUserStoreExternal()
@@ -40,6 +41,7 @@ watch(route, () => {
     <Hamburger class="hamburger-container" />
     <Breadcrumb class="breadcrumb-container" :breadcrumbData="breadcrumbData" />
     <div class="right-menu">
+      <theme-select class="right-menu-item hover-effect" />
       <lang-select class="right-menu-item hover-effect" />
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">

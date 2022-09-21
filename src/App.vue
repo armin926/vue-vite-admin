@@ -1,16 +1,17 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { ElConfigProvider } from "element-plus"
-import zhCn from "element-plus/lib/locale/lang/zh-cn"
-import en from "element-plus/lib/locale/lang/en"
-import { useAppStoreExternal } from "@/store/modules/app"
+import { useThemeStoreExternal } from '@/store/modules/theme'
+import { generateNewStyle, writeNewStyle } from '@/utils/theme'
 
-const useAppStore = useAppStoreExternal()
-const language = computed(() => useAppStore.getLanuage)
+const useThemeStore = useThemeStoreExternal()
+
+generateNewStyle(useThemeStore.getMainColor).then(newStyleText => {
+  writeNewStyle(newStyleText)
+})
 </script>
 
 <template>
-  <el-config-provider :locale="language === 'en' ? en : zhCn">
+  <el-config-provider>
     <RouterView />
   </el-config-provider>
 </template>
