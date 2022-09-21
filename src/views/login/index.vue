@@ -3,7 +3,10 @@ import { reactive, ref } from 'vue'
 import { validatePassword } from './rules'
 import { useUserStoreExternal } from '@/store/modules/user'
 import type { FormInstance, FormRules } from 'element-plus'
+import { useI18n } from '@/hooks/useI18n'
+import LangSelect from '@/components/LangSelect/index.vue'
 
+const { t } = useI18n()
 // 数据源
 const loginForm = ref<LoginFormModule>({
   username: 'super-admin',
@@ -11,7 +14,7 @@ const loginForm = ref<LoginFormModule>({
 })
 // 验证规则
 const loginRules = reactive<FormRules>({
-  username: [{ required: true, trigger: 'blur', message: '请输入用户名' }],
+  username: [{ required: true, trigger: 'blur', message: t('login.usernameRule') }],
   password: [{ required: true, trigger: 'blur', validator: validatePassword() }]
 })
 // 处理密码框文本显示状态
@@ -54,7 +57,8 @@ const handleLogin = async (formEl: FormInstance | undefined) => {
       :rules="loginRules"
     >
       <div class="title-container">
-        <h3 class="title">用户登录</h3>
+        <h3 class="title">{{ t('login.title') }}</h3>
+        <lang-select class="lang-select" effect="light"></lang-select>
       </div>
       <el-form-item prop="username">
         <span class="svg-container">
@@ -62,7 +66,7 @@ const handleLogin = async (formEl: FormInstance | undefined) => {
         </span>
         <el-input
           v-model="loginForm.username"
-          placeholder="用户名"
+          :placeholder="t('login.username')"
           name="username"
           type="text"
         />
@@ -74,7 +78,7 @@ const handleLogin = async (formEl: FormInstance | undefined) => {
         </span>
         <el-input
           v-model="loginForm.password"
-          placeholder="密码"
+          :placeholder="t('login.password')"
           name="password"
           :type="passwordType"
         />
@@ -91,8 +95,9 @@ const handleLogin = async (formEl: FormInstance | undefined) => {
         style="width: 100%; margin-bottom: 30px"
         :loading="loading"
         @click="handleLogin(loginFormRef)"
-        >登录</el-button
+        >{{ t('login.loginBtn') }}</el-button
       >
+      <div class="tips" v-html="t('login.desc')"></div>
     </el-form>
   </div>
 </template>
@@ -145,6 +150,19 @@ $cursor: #fff;
         color: $light_gray;
         height: 47px;
         caret-color: $cursor;
+      }
+    }
+  }
+
+  .tips {
+    font-size: 16px;
+    line-height: 28px;
+    color: #fff;
+    margin-bottom: 10px;
+
+    span {
+      &:first-of-type {
+        margin-right: 16px;
       }
     }
   }

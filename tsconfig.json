@@ -19,6 +19,7 @@
       "@/*": ["src/*"]
     },
     "types": [
+      "@intlify/vite-plugin-vue-i18n/client",
       "element-plus/global"
     ],
     "typeRoots": ["./node_modules/@types/", "./@types"]

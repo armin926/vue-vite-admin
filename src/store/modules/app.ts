@@ -5,7 +5,7 @@ export const useAppStore = defineStore({
   id: 'app',
   state: () => {
     return {
-      sidebarOpened: true
+      sidebarOpened: true // 侧边导航栏是否收缩
     }
   },
   persist: {
@@ -17,6 +17,9 @@ export const useAppStore = defineStore({
     }
   },
   actions: {
+    /**
+     * 侧边栏收缩
+     */
     triggerSidebarOpened() {
       this.sidebarOpened = !this.sidebarOpened
     }

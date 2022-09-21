@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+// 初始化多语言
+import { setupI18n } from '@/plugins/vueI18n'
 import App from './App.vue'
 import { setupStore } from '@/store'
 import { setupRouter } from '@/router'
@@ -9,7 +11,9 @@ import './permission' // 登录鉴权
 // 引入element-plus
 import { setupElementPlus } from '@/plugins/elementPlus/index'
 const setupApp = async () => {
-  const app = await createApp(App)
+  const app = createApp(App)
+
+  await setupI18n(app)
   // store
   setupStore(app)
 

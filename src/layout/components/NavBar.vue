@@ -5,9 +5,14 @@ import { Tools } from '@element-plus/icons-vue'
 import { ElAvatar, ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
 import Hamburger from '@/components/Hamburger.vue';
 import Breadcrumb from '@/components/Breadcrumb/index.vue';
+import LangSelect from '@/components/LangSelect/index.vue'
 import { useRoute } from 'vue-router'
+import { useI18n } from '@/hooks/useI18n'
+
 
 const useStore = useUserStoreExternal()
+
+const { t } = useI18n()
 
 const userInfo = computed(() => {
   return useStore.getUserInfo
@@ -35,6 +40,7 @@ watch(route, () => {
     <Hamburger class="hamburger-container" />
     <Breadcrumb class="breadcrumb-container" :breadcrumbData="breadcrumbData" />
     <div class="right-menu">
+      <lang-select class="right-menu-item hover-effect" />
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -45,13 +51,13 @@ watch(route, () => {
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">
             <router-link to="/">
-              <el-dropdown-item> 首页 </el-dropdown-item>
+              <el-dropdown-item> {{ t('navBar.home') }} </el-dropdown-item>
             </router-link>
             <a target="_blank" href="">
-              <el-dropdown-item>课程主页</el-dropdown-item>
+              <el-dropdown-item>{{ t('navBar.course') }}</el-dropdown-item>
             </a>
             <el-dropdown-item divided @click="logout">
-              退出登录
+              {{ t('navBar.logout') }}
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -87,6 +93,17 @@ watch(route, () => {
     align-items: center;
     float: right;
     padding-right: 16px;
+
+    :deep(.right-menu-item) {
+      display: inline-block;
+      padding: 0 18px 0 0;
+      font-size: 24px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
+      &.hover-effect {
+        cursor: pointer;
+      }
+    }
 
     :deep(.avatar-container) {
       cursor: pointer;

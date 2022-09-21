@@ -33,3 +33,5 @@ declare interface IResponse<T = any> {
   data: T extends any ? T : T & any
   msg: string
 }
+
+declare type LocaleType = 'zh-CN' | 'en'

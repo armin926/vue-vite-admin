@@ -1,12 +1,11 @@
 import vue from '@vitejs/plugin-vue'
 import * as path from 'path'
-// import Components from 'unplugin-vue-components/vite'
-// import AutoImport from 'unplugin-auto-import/vite'
-// import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { createStyleImportPlugin, ElementPlusResolve } from 'vite-plugin-style-import'
 import { loadEnv } from 'vite'
 import type { ConfigEnv, UserConfigExport } from 'vite'
+import VueI18n from '@intlify/vite-plugin-vue-i18n'
+import { resolve } from 'path'
 const root = process.cwd()
 
 // https://vitejs.dev/config/
@@ -28,6 +27,11 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport =>{
     base: '/',
     plugins: [
       vue(),
+      VueI18n({
+        runtimeOnly: true,
+        compositionOnly: true,
+        include: [resolve(__dirname, 'src/locales/**')]
+      }),
       createStyleImportPlugin({
         resolves: [ElementPlusResolve()],
         libs: [{
