@@ -9,7 +9,7 @@ import LangSelect from '@/components/LangSelect/index.vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from '@/hooks/useI18n'
 import ThemeSelect from '@/components/ThemeSelect/index.vue';
-
+import Dark from '@/components/Dark/index.vue'
 
 const useStore = useUserStoreExternal()
 
@@ -43,6 +43,7 @@ watch(route, () => {
     <div class="right-menu">
       <theme-select class="right-menu-item hover-effect" />
       <lang-select class="right-menu-item hover-effect" />
+      <Dark class="right-menu-item" />
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -73,7 +74,7 @@ watch(route, () => {
   height: 50px;
   overflow: hidden;
   position: relative;
-  background: #fff;
+  background: var(--el-bg-color);
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   .hamburger-container {
     line-height: 46px;

@@ -13,6 +13,7 @@
 
 <script lang="ts" setup>
 import {} from 'vue'
+import { ElRow } from 'element-plus'
 </script>
 
 <style lang="scss" scoped></style>

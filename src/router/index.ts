@@ -2,115 +2,30 @@ import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import type { App } from 'vue'
 import layout from '@/layout/index.vue'
+import ArticleCreaterRouter from './modules/ArticleCreate'
+import ArticleRouter from './modules/Article'
+import PermissionListRouter from './modules/PermissionList'
+import RoleListRouter from './modules/RoleList'
+import UserManageRouter from './modules/UserManage'
+import { useUserStoreExternal } from '@/store/modules/user'
+
+export const asyncRoutes = [
+  RoleListRouter,
+  UserManageRouter,
+  PermissionListRouter,
+  ArticleCreaterRouter,
+  ArticleRouter
+]
+
 /**
  * 私有路由
  */
-const privateRoutes: Array<RouteRecordRaw> = [
-  {
-    path: '/user',
-    component: layout,
-    redirect: '/user/manage',
-    meta: {
-      title: 'user',
-      icon: 'personnel'
-    },
-    children: [
-      {
-        path: '/user/manage',
-        name: 'userManage',
-        component: () => import('@/views/user-manage/index.vue'),
-        meta: {
-          title: 'userManage',
-          icon: 'personnel-manage'
-        }
-      },
-      {
-        path: '/user/role',
-        name: 'Role',
-        component: () => import('@/views/role-list/index.vue'),
-        meta: {
-          title: 'roleList',
-          icon: 'role'
-        }
-      },
-      {
-        path: '/user/permission',
-        name: 'Permission',
-        component: () => import('@/views/permission-list/index.vue'),
-        meta: {
-          title: 'permissionList',
-          icon: 'permission'
-        }
-      },
-      {
-        path: '/user/info/:id',
-        name: 'userInfo',
-        component: () => import('@/views/user-info/index.vue'),
-        meta: {
-          title: 'userInfo'
-        }
-      },
-      {
-        path: '/user/import',
-        name: 'Import',
-        component: () => import('@/views/import/index.vue'),
-        meta: {
-          title: 'excelImport'
-        }
-      }
-    ]
-  },
-  {
-    path: '/article',
-    component: layout,
-    redirect: '/article/ranking',
-    meta: {
-      title: 'article',
-      icon: 'article'
-    },
-    children: [
-      {
-        path: '/article/ranking',
-        name: 'articleRanking',
-        component: () => import('@/views/article-ranking/index.vue'),
-        meta: {
-          title: 'articleRanking',
-          icon: 'article-ranking'
-        }
-      },
-      {
-        path: '/article/:id',
-        name: 'articleDetail',
-        component: () => import('@/views/article-detail/index.vue'),
-        meta: {
-          title: 'articleDetail'
-        }
-      },
-      {
-        path: '/article/create',
-        name: 'articleCreate',
-        component: () => import('@/views/article-create/index.vue'),
-        meta: {
-          title: 'articleCreate',
-          icon: 'article-create'
-        }
-      },
-      {
-        path: '/article/editor/:id',
-        name: 'articleEditor',
-        component: () => import('@/views/article-create/index.vue'),
-        meta: {
-          title: 'articleEditor'
-        }
-      }
-    ]
-  }
-]
+export const privateRoutes: Array<RouteRecordRaw> = asyncRoutes
 
 /**
  * 共有路由
  */
-const publicRoutes: Array<RouteRecordRaw> = [
+export const publicRoutes: Array<RouteRecordRaw> = [
   {
     path: '/login',
     component: () => import('@/views/login/index.vue')
@@ -145,8 +60,21 @@ const publicRoutes: Array<RouteRecordRaw> = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [...publicRoutes, ...privateRoutes]
+  routes: publicRoutes
 })
+
+/**
+ * 初始化路由表
+ */
+export function resetRouter() {
+  const useUserStore = useUserStoreExternal()
+  if (useUserStore.getUserInfo?.permission?.menus) {
+    const menus = useUserStore.getUserInfo.permission.menus
+    menus.forEach((menu: any) => {
+      router.removeRoute(menu)
+    })
+  }
+}
 
 export const setupRouter = (app: App<Element>) => {
   app.use(router)

@@ -20,13 +20,16 @@ const useThemeStore = defineStore({
   getters: {
     getMainColor(): string {
       return this.mainColor
+    },
+    getVariables(): any {
+      return this.variables
     }
   },
   actions: {
     // 设置主题色
     setMainColor(newColor: string) {
       this.mainColor = newColor
-      this.variables.menuBg = newColor
+      
       wsCache.set(MAIN_COLOR, newColor)
     }
   }

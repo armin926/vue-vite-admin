@@ -52,6 +52,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport =>{
       })
     ],
     server: {
+      host: '0.0.0.0',
       open: true,
       proxy: {
         [proxyPath]: {

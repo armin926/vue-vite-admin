@@ -6,7 +6,7 @@ import { appMoudles } from '@/config/app'
 import type { AppState } from '@/config/app'
 import { useCache } from '@/hooks/useCache'
 import { TOKEN, TIME_STAMP } from '@/constant'
-import router from '@/router'
+import router, { resetRouter } from '@/router'
 import { setTimeStamp } from '@/utils/auth'
 
 const { wsCache } = useCache()
@@ -61,6 +61,7 @@ export const useUserStore = defineStore({
       this.userInfo = {}
       wsCache.delete(TOKEN)
       wsCache.delete(TIME_STAMP)
+      resetRouter()
       router.push('/login')
     },
     /**

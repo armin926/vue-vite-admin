@@ -16,7 +16,7 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
   const useStore = useUserStoreExternal()
   // 添加 icode（此为慕课调试接口）
   if(config && config.headers) {
-    config.headers['icode'] = '2E0F76D93AF47A3D'
+    config.headers['icode'] = '6D1AE2C4A382488A'
     
     if(useStore.getToken) {
       if(isCheckTimeout()) {

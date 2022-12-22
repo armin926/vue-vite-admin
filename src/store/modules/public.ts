@@ -24,6 +24,11 @@ export const usePublicStore = defineStore({
     getCss(): any {
       return this.cssVar
     }
+  },
+  actions: {
+    changeCss(themeColor: any) {
+      this.cssVar.menuBg = themeColor
+    }
   }
 })
 
