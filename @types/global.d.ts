@@ -35,3 +35,10 @@ declare interface IResponse<T = any> {
 }
 
 declare type LocaleType = 'zh-CN' | 'en'
+
+declare interface Fn<T = any, R = T> {
+  (...arg: T[]): R;
+}
+
+declare type TimeoutHandle = ReturnType<typeof setTimeout>;
+declare type IntervalHandle = ReturnType<typeof setInterval>;

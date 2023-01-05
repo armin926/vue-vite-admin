@@ -64,6 +64,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport =>{
         }
       }
     },
+    build: {
+      sourcemap: false,
+      chunkSizeWarningLimit: 2000
+    },
     resolve: {
       // 设置别名
       alias: {

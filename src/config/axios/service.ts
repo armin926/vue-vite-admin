@@ -16,7 +16,7 @@ service.interceptors.request.use((config: AxiosRequestConfig) => {
   const useStore = useUserStoreExternal()
   // 添加 icode（30天需要重新获取一次）
   if(config && config.headers) {
-    config.headers['icode'] = '6D1AE2C4A382488A'
+    config.headers['icode'] = '10BEC321FEFD6ADB'
     
     if(useStore.getToken) {
       if(isCheckTimeout()) {
