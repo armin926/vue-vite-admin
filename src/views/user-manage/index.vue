@@ -2,7 +2,9 @@
   <div class="user-manage-container">
     <el-card class="header">
       <div>
-        <el-button type="primary" v-permission="['importUser']"> {{ t('excel.importExcel') }}</el-button>
+        <el-button type="primary" v-permission="['importUser']">
+          {{ t('excel.importExcel') }}</el-button
+        >
         <el-button type="success">
           {{ t('excel.exportExcel') }}
         </el-button>
@@ -11,25 +13,17 @@
     <el-card>
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column label="#" type="index" />
-        <el-table-column prop="username" :label="t('excel.name')">
-        </el-table-column>
-        <el-table-column prop="mobile" :label="t('excel.mobile')">
-        </el-table-column>
+        <el-table-column prop="username" :label="t('excel.name')"> </el-table-column>
+        <el-table-column prop="mobile" :label="t('excel.mobile')"> </el-table-column>
         <el-table-column :label="t('excel.avatar')" align="center">
           <template v-slot="{ row }">
-            <el-image
-              class="avatar"
-              :src="row.avatar"
-              :preview-src-list="[row.avatar]"
-            ></el-image>
+            <el-image class="avatar" :src="row.avatar" :preview-src-list="[row.avatar]"></el-image>
           </template>
         </el-table-column>
         <el-table-column :label="t('excel.role')">
           <template #default="{ row }">
             <div v-if="row.role && row.role.length > 0">
-              <el-tag v-for="item in row.role" :key="item.id" size="small">{{
-                item.title
-              }}</el-tag>
+              <el-tag v-for="item in row.role" :key="item.id" size="small">{{ item.title }}</el-tag>
             </div>
             <div v-else>
               <el-tag size="small">{{ t('excel.defaultRole') }}</el-tag>
@@ -39,18 +33,16 @@
         <el-table-column prop="openTime" :label="t('excel.openTime')">
           <template #default="{ row }">{{ $filters.dateFilter(row.openTime) }}</template>
         </el-table-column>
-        <el-table-column
-          :label="t('excel.action')"
-          fixed="right"
-          width="260"
-        >
+        <el-table-column :label="t('excel.action')" fixed="right" width="260">
           <template #default="{ row }">
-            <el-button type="primary" size="small">{{
-              t('excel.show')
-            }}</el-button>
-            <el-button type="info" size="small" @click="onShowRoleClick(row)" v-permission="['distributeRole']">{{
-              t('excel.showRole')
-            }}</el-button>
+            <el-button type="primary" size="small">{{ t('excel.show') }}</el-button>
+            <el-button
+              type="info"
+              size="small"
+              @click="onShowRoleClick(row)"
+              v-permission="['distributeRole']"
+              >{{ t('excel.showRole') }}</el-button
+            >
             <el-button type="danger" size="small" v-permission="['removeUser']">{{
               t('excel.remove')
             }}</el-button>
@@ -130,10 +122,9 @@ const onShowRoleClick = (row: any) => {
 }
 
 // 保证每次打开重新获取用户角色数据
-watch(roleDialogVisible, val => {
+watch(roleDialogVisible, (val) => {
   if (!val) selectUserId.value = ''
 })
-
 </script>
 
 <style lang="scss" scoped>
@@ -158,4 +149,3 @@ watch(roleDialogVisible, val => {
   }
 }
 </style>
-

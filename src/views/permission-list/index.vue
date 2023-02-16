@@ -18,9 +18,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue"
-import { permissionList } from "@/api/permission"
-import { ElCard, ElTable, ElTableColumn } from "element-plus"
+import { ref } from 'vue'
+import { permissionList } from '@/api/permission'
+import { ElCard, ElTable, ElTableColumn } from 'element-plus'
 import { useI18n } from '@/hooks/useI18n'
 
 const { t } = useI18n()

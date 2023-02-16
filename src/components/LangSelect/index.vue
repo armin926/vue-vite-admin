@@ -2,14 +2,14 @@
 import { ElDropdown, ElDropdownMenu, ElDropdownItem, ElTooltip } from 'element-plus'
 import { useLocaleStore } from '@/store/modules/locale'
 import { useLocale } from '@/hooks/useLocale'
-import { computed, unref } from 'vue';
+import { computed, unref } from 'vue'
 import { useI18n } from '@/hooks/useI18n'
 
 defineProps({
   effect: {
     type: String,
     default: 'dark',
-    validator: function(value) {
+    validator: function (value) {
       // 这个值必须匹配下列字符串中的一个
       return ['dark', 'light'].indexOf(value as string) !== -1
     }
@@ -34,7 +34,6 @@ const setLang = (lang: LocaleType) => {
   const { changeLocale } = useLocale()
   changeLocale(lang)
 }
-
 </script>
 
 <template>
@@ -46,7 +45,13 @@ const setLang = (lang: LocaleType) => {
     </div>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item v-for="item in langMap" :key="item.lang" :disabled="item.lang === currentLang.lang" :command="item.lang">{{ item.name }}</el-dropdown-item>
+        <el-dropdown-item
+          v-for="item in langMap"
+          :key="item.lang"
+          :disabled="item.lang === currentLang.lang"
+          :command="item.lang"
+          >{{ item.name }}</el-dropdown-item
+        >
       </el-dropdown-menu>
     </template>
   </el-dropdown>

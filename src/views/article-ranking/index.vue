@@ -2,7 +2,7 @@
   <div class="">文章排名</div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {} from 'vue'
 </script>
 

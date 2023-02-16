@@ -33,7 +33,7 @@ const handleLogin = async (formEl: FormInstance | undefined) => {
       loading.value = true
       userStore
         .login(loginForm.value)
-        .then((res) => {
+        .then(() => {
           loading.value = false
           //TODO 登录后的操作
         })
@@ -50,12 +50,7 @@ const handleLogin = async (formEl: FormInstance | undefined) => {
 
 <template>
   <div class="login-container">
-    <el-form
-      ref="loginFormRef"
-      class="login-form"
-      :model="loginForm"
-      :rules="loginRules"
-    >
+    <el-form ref="loginFormRef" class="login-form" :model="loginForm" :rules="loginRules">
       <div class="title-container">
         <h3 class="title">{{ t('login.title') }}</h3>
         <lang-select class="lang-select" effect="light"></lang-select>

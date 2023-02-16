@@ -2,7 +2,7 @@
 import { ElMenu } from 'element-plus'
 import { useRouter, useRoute } from 'vue-router'
 import { filterRouters, generateMenus } from '@/utils/route'
-import { computed } from 'vue';
+import { computed } from 'vue'
 import SidebarItem from './SidebarItem.vue'
 import { usePublicStoreExternal } from '@/store/modules/public'
 import { useAppStoreExternal } from '@/store/modules/app'
@@ -13,7 +13,7 @@ const routes = computed(() => {
   return generateMenus(filterRoutes)
 })
 
-const usePublicStore  = usePublicStoreExternal()
+const usePublicStore = usePublicStoreExternal()
 const route = useRoute()
 const activeMenu = computed(() => {
   const { path } = route
@@ -21,7 +21,6 @@ const activeMenu = computed(() => {
 })
 
 const useAppStore = useAppStoreExternal()
-
 </script>
 <template>
   <!-- 一级 menu 菜单 -->

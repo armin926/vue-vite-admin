@@ -1,0 +1,10 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+. "$(dirname "$0")/common.sh"
+
+# ci 时禁止 husky
+[ -n "$CI" ] && exit 0
+
+yarn lint:lint-staged
+yarn ts:check
+yarn prettier

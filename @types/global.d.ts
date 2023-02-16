@@ -5,6 +5,8 @@ declare type LoginFormModule = {
 
 declare type Nullable<T> = T | null
 
+declare type KeyOfMap<T> = keyof T
+
 declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>
 
 declare type Recordable<T = any, K = string> = Record<K extends null | undefined ? string : K, T>
@@ -37,8 +39,8 @@ declare interface IResponse<T = any> {
 declare type LocaleType = 'zh-CN' | 'en'
 
 declare interface Fn<T = any, R = T> {
-  (...arg: T[]): R;
+  (...arg: T[]): R
 }
 
-declare type TimeoutHandle = ReturnType<typeof setTimeout>;
-declare type IntervalHandle = ReturnType<typeof setInterval>;
+declare type TimeoutHandle = ReturnType<typeof setTimeout>
+declare type IntervalHandle = ReturnType<typeof setInterval>

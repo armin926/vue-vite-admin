@@ -15,7 +15,7 @@ export const useUserStore = defineStore({
   id: 'user',
   state: (): AppState => appMoudles,
   persist: {
-    enabled: true , // 这个配置代表存储生效，而且是整个store都存储
+    enabled: true // 这个配置代表存储生效，而且是整个store都存储
   },
   getters: {
     // 获取 token
@@ -34,23 +34,25 @@ export const useUserStore = defineStore({
     /**
      * 登录
      * @param userInfo (用户名和密码)
-     * @returns 
+     * @returns
      */
     login(userInfo: LoginFormModule) {
       const { password, username } = userInfo
       return new Promise((resolve, reject) => {
-        login({username, password:md5(password)}).then(res => {
-          // 存 token
-          this.token = res.token as unknown as string
-          wsCache.set(TOKEN, res.token)
-          // 保存登录时间
-          setTimeStamp()
-          // 跳转至首页
-          router.push('/')
-          resolve(res)
-        }).catch(err => {
-          reject(err)
-        })
+        login({ username, password: md5(password) })
+          .then((res) => {
+            // 存 token
+            this.token = res.token as unknown as string
+            wsCache.set(TOKEN, res.token)
+            // 保存登录时间
+            setTimeStamp()
+            // 跳转至首页
+            router.push('/')
+            resolve(res)
+          })
+          .catch((err) => {
+            reject(err)
+          })
       })
     },
     /**

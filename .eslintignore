@@ -1,0 +1,9 @@
+/build/
+/config/
+/dist/
+*.js
+*.json
+*d.ts
+/test/unit/coverage/
+/node_modules/*
+/dist*

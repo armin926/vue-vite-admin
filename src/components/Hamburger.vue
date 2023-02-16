@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useAppStoreExternal } from '@/store/modules/app'
-import { computed } from 'vue';
+import { computed } from 'vue'
 
 const useAppStore = useAppStoreExternal()
 const toggleClick = () => {
@@ -19,13 +19,13 @@ const icon = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-  .hamburger-container {
-    padding: 0 16px;
-    .hamburger {
-      display: inline-block;
-      vertical-align: middle;
-      width: 20px;
-      height: 20px;
-    }
+.hamburger-container {
+  padding: 0 16px;
+  .hamburger {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
   }
+}
 </style>

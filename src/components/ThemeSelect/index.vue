@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import { ElTooltip, ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
 import { useI18n } from '@/hooks/useI18n'
-import SelectColor from './components/SelectColor.vue';
-import { ref } from 'vue';
+import SelectColor from './components/SelectColor.vue'
+import { ref } from 'vue'
 
 const { t } = useI18n()
 
 const selectColorVisible = ref(false)
 const handleSetTheme = (command: string) => {
+  console.log(command)
   selectColorVisible.value = true
 }
 </script>

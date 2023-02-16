@@ -3,9 +3,9 @@ import type { RouteRecordRaw } from 'vue-router'
 /**
  * 返回所有子路由
  */
-const getChildrenRoutes = (routes:RouteRecordRaw[]) => {
+const getChildrenRoutes = (routes: RouteRecordRaw[]) => {
   const result: RouteRecordRaw[] = []
-  routes.forEach(route => {
+  routes.forEach((route) => {
     if (route.children && route.children.length > 0) {
       result.push(...route.children)
     }
@@ -19,8 +19,8 @@ const getChildrenRoutes = (routes:RouteRecordRaw[]) => {
  */
 export const filterRouters = (routes: RouteRecordRaw[]) => {
   const childrenRoutes = getChildrenRoutes(routes)
-  return routes.filter(route => {
-    return !childrenRoutes.find(childrenRoute => {
+  return routes.filter((route) => {
+    return !childrenRoutes.find((childrenRoute) => {
       return childrenRoute.path === route.path
     })
   })
@@ -41,18 +41,18 @@ export const isNull = (data: any) => {
 export const generateMenus = (routes: RouteRecordRaw[], basePath = '') => {
   const result: RouteRecordRaw[] = []
   // 遍历路由表
-  routes.forEach(item => {
+  routes.forEach((item) => {
     // 不存在 children && 不存在 meta 直接 return
     if (isNull(item.meta) && isNull(item.children)) return
     // 存在 children 不存在 meta, 进入迭代
     if (isNull(item.meta) && !isNull(item.children)) {
-      result.push(...generateMenus(item.children!))
+      result.push(...generateMenus(item.children || []))
       return
     }
     // 合并 path 作为跳转路径
     const routePath = path.resolve(basePath, item.path)
     // 路由分离之后，存在同名父路由的情况，需要单独处理
-    let route = result.find(item => item.path === routePath)
+    let route = result.find((item) => item.path === routePath)
     if (!route) {
       route = {
         ...item,

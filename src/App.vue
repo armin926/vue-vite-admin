@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { ElConfigProvider } from "element-plus"
-import { useThemeStoreExternal } from "@/store/modules/theme"
-import { generateNewStyle, writeNewStyle } from "@/utils/theme"
-import { useTitle } from "@/hooks/web/useTitle"
+import { ElConfigProvider } from 'element-plus'
+import { useThemeStoreExternal } from '@/store/modules/theme'
+import { generateNewStyle, writeNewStyle } from '@/utils/theme'
+import { useTitle } from '@/hooks/web/useTitle'
 const useThemeStore = useThemeStoreExternal()
 
 generateNewStyle(useThemeStore.getMainColor).then((newStyleText) => {

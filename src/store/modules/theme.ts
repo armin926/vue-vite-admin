@@ -29,7 +29,7 @@ const useThemeStore = defineStore({
     // 设置主题色
     setMainColor(newColor: string) {
       this.mainColor = newColor
-      
+
       wsCache.set(MAIN_COLOR, newColor)
     }
   }

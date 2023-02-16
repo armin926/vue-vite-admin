@@ -27,10 +27,7 @@ const linkHoverColor = ref(usePublicStore.getCss.menuBg)
 <template>
   <el-breadcrumb class="breadcrumb" separator="/">
     <transition-group name="breadcrumb">
-      <el-breadcrumb-item
-        v-for="(item, index) in breadcrumbData"
-        :key="item.path"
-      >
+      <el-breadcrumb-item v-for="(item, index) in breadcrumbData" :key="item.path">
         <!-- 不可点击项 -->
         <span v-if="index === breadcrumbData.length - 1" class="no-redirect">{{
           generateTitle(item.meta.title)

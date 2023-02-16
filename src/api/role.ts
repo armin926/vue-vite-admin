@@ -10,7 +10,7 @@ export const roleList = () => {
 /**
  * 获取指定角色的权限
  */
-export const rolePermission = (roleId: string|number) => {
+export const rolePermission = (roleId: string | number) => {
   return request.get({ url: `/api/role/permission/${roleId}` })
 }
 

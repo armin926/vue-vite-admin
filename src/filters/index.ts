@@ -1,15 +1,21 @@
 import dayjs from 'dayjs'
+import { App } from 'vue'
 
-const dateFilter = (val: string | number | Date | dayjs.Dayjs | null | undefined, format = 'YYYY-MM-DD') => {
+const dateFilter = (
+  val: string | number | Date | dayjs.Dayjs | null | undefined,
+  format = 'YYYY-MM-DD'
+) => {
+  let value = val
   if (!isNaN(val as number)) {
-    val = parseInt(val as any)
+    value = parseInt(val as any)
   }
 
-  return dayjs(val).format(format)
+  return dayjs(value).format(format)
 }
 
-export default (app: any) => {
-  app.config.globalProperties.$filters = {
+export default (app: App) => {
+  const ap = app
+  ap.config.globalProperties.$filters = {
     dateFilter
   }
 }

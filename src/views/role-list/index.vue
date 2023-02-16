@@ -7,7 +7,13 @@
         <el-table-column :label="t('role.desc')" prop="describe" />
         <el-table-column :label="t('role.action')" prop="action" width="260">
           <template #default="{ row }">
-            <el-button type="primary" size="small" @click="onDistributePermissionClick(row)" v-permission="['distributePermission']">{{ t('role.assignPermissions') }}</el-button>
+            <el-button
+              type="primary"
+              size="small"
+              @click="onDistributePermissionClick(row)"
+              v-permission="['distributePermission']"
+              >{{ t('role.assignPermissions') }}</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -17,10 +23,10 @@
 </template>
 
 <script lang="ts" setup>
-import { roleList } from '@/api/role';
+import { roleList } from '@/api/role'
 import { ref } from 'vue'
 import { ElCard, ElTable, ElTableColumn } from 'element-plus'
-import DistributePermission from './components/DistributePermission.vue';
+import DistributePermission from './components/DistributePermission.vue'
 import { useI18n } from '@/hooks/useI18n'
 
 const { t } = useI18n()

@@ -1,6 +1,9 @@
 import { useUserStoreExternal } from '@/store/modules/user'
 
-function checkPermission(el: { parentNode: { removeChild: (arg0: any) => any } }, binding: { value: any }) {
+function checkPermission(
+  el: { parentNode: { removeChild: (arg0: any) => any } },
+  binding: { value: any }
+) {
   // 获取绑定的值，此处为权限
   const { value } = binding
   const useUserStore = useUserStoreExternal()

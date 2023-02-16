@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { useUserStoreExternal } from '@/store/modules/user'
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue'
 import { Tools } from '@element-plus/icons-vue'
 import { ElAvatar, ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
-import Hamburger from '@/components/Hamburger.vue';
-import Breadcrumb from '@/components/Breadcrumb/index.vue';
+import Hamburger from '@/components/Hamburger.vue'
+import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from '@/hooks/useI18n'
-import ThemeSelect from '@/components/ThemeSelect/index.vue';
+import ThemeSelect from '@/components/ThemeSelect/index.vue'
 import Dark from '@/components/Dark/index.vue'
 
 const useStore = useUserStoreExternal()
@@ -27,13 +27,16 @@ const route = useRoute()
 // 生成数组数据
 const breadcrumbData = ref<any>([])
 const getBreadcrumbData = () => {
-  breadcrumbData.value = route.matched.filter(item => item.meta && item.meta.title)
+  breadcrumbData.value = route.matched.filter((item) => item.meta && item.meta.title)
 }
 // 监听路由变化时触发
-watch(route, () => {
-  getBreadcrumbData()
-},{ immediate: true})
-
+watch(
+  route,
+  () => {
+    getBreadcrumbData()
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
@@ -47,9 +50,8 @@ watch(route, () => {
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <el-avatar shape="square" :size="40" :src="userInfo.avatar"
-          ></el-avatar>
-          <Tools style="width: 1em; height: 1em; margin-right: 8px;" />
+          <el-avatar shape="square" :size="40" :src="userInfo.avatar"></el-avatar>
+          <Tools style="width: 1em; height: 1em; margin-right: 8px" />
         </div>
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">

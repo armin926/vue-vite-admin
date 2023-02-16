@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { generateTitle } from "@/utils/i18n"
+import { generateTitle } from '@/utils/i18n'
 defineProps({
   title: {
     type: String,
-    required: true,
+    required: true
   },
   icon: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 })
 </script>
 

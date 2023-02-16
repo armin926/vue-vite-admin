@@ -1,12 +1,12 @@
 <template>
   <div>
     <el-switch
-    type="small"
-    v-model="isDark"
-    inline-prompt
-    :active-icon="Moon"
-    :inactive-icon="Sunny"
-  />
+      type="small"
+      v-model="isDark"
+      inline-prompt
+      :active-icon="Moon"
+      :inactive-icon="Sunny"
+    />
   </div>
 </template>
 
@@ -21,11 +21,15 @@ const isDark = useDark()
 
 const usePublicStore = usePublicStoreExternal()
 
-watch(() => isDark.value, (val) => {
-  if (val) {
-    usePublicStore.changeCss('#212121')
-  } else {
-    usePublicStore.changeCss('#001529')
-  }
-}, { immediate: true })
+watch(
+  () => isDark.value,
+  (val) => {
+    if (val) {
+      usePublicStore.changeCss('#212121')
+    } else {
+      usePublicStore.changeCss('#001529')
+    }
+  },
+  { immediate: true }
+)
 </script>

@@ -29,10 +29,9 @@ const setupApp = async () => {
   installFilter(app)
 
   installDirective(app)
-  
+
   app.component('svg-icon', SvgIcon)
 
-  
   app.mount('#app')
 }
 

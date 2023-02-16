@@ -5,7 +5,7 @@ import { LANG } from '@/constant'
 
 const { wsCache } = useCache()
 
-export const elLocaleMap = {
+export const elLocaleMap: { [key: string]: any } = {
   'zh-CN': zhCn,
   en: en
 }

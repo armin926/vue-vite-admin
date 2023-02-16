@@ -1,9 +1,5 @@
 <template>
-  <el-dialog
-    :title="t('excel.roleDialogTitle')"
-    :model-value="modelValue"
-    @close="closed"
-  >
+  <el-dialog :title="t('excel.roleDialogTitle')" :model-value="modelValue" @close="closed">
     <el-tree
       ref="treeRef"
       :data="allPermission"
@@ -16,33 +12,31 @@
 
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="closed">{{ t("universal.cancel") }}</el-button>
-        <el-button type="primary" @click="onConfirm">{{
-          t("universal.confirm")
-        }}</el-button>
+        <el-button @click="closed">{{ t('universal.cancel') }}</el-button>
+        <el-button type="primary" @click="onConfirm">{{ t('universal.confirm') }}</el-button>
       </span>
     </template>
   </el-dialog>
 </template>
 
 <script lang="ts" setup>
-import { defineProps, defineEmits, ref, watch } from "vue"
-import { ElDialog, ElTree, ElMessage } from "element-plus"
-import { useI18n } from "@/hooks/useI18n"
-import { permissionList } from "@/api/permission"
-import { rolePermission, distributePermission } from "@/api/role";
+import { defineProps, defineEmits, ref, watch } from 'vue'
+import { ElDialog, ElTree, ElMessage } from 'element-plus'
+import { useI18n } from '@/hooks/useI18n'
+import { permissionList } from '@/api/permission'
+import { rolePermission, distributePermission } from '@/api/role'
 
 const props = defineProps({
   modelValue: {
     type: Boolean,
-    required: true,
+    required: true
   },
   roleId: {
     type: String,
     required: true
   }
 })
-const emits = defineEmits(["update:modelValue"])
+const emits = defineEmits(['update:modelValue'])
 
 const { t } = useI18n()
 
@@ -67,7 +61,7 @@ const onConfirm = async () => {
  * 关闭
  */
 const closed = () => {
-  emits("update:modelValue", false)
+  emits('update:modelValue', false)
 }
 
 // 所有权限
@@ -86,7 +80,10 @@ const getRolePermission = async () => {
   treeRef.value.setCheckedKeys(checkedKeys)
 }
 
-watch(() => props.roleId, val => {
-  if (val) getRolePermission()
-})
+watch(
+  () => props.roleId,
+  (val) => {
+    if (val) getRolePermission()
+  }
+)
 </script>

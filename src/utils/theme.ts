@@ -3,20 +3,24 @@ import rgbHex from 'rgb-hex'
 import formula from '@/constant/formula.json'
 import axios from 'axios'
 
+type Colors = {
+  [key: string]: string
+}
+
 /**
  * 根据主色值，生成最新的样式表
  */
- export const generateNewStyle = async (primaryColor: any) => {
-  const colors = generateColors(primaryColor)
+export const generateNewStyle = async (primaryColor: string) => {
+  const colors: Colors = generateColors(primaryColor)
   let cssText = await getOriginalStyle()
 
-  // 遍历生成的样式表，在 CSS 的原样式中进行全局替换
-  Object.keys(colors).forEach(key => {
-    cssText = cssText.replace(
-      new RegExp('(:|\\s+)' + key, 'g'),
-      '$1' + colors[key]
-    )
-  })
+  if (colors) {
+    // 遍历生成的样式表，在 CSS 的原样式中进行全局替换
+    type Keys = KeyOfMap<Colors>
+    Object.keys(colors).forEach((key: Keys) => {
+      cssText = cssText.replace(new RegExp('(:|\\s+)' + key, 'g'), '$1' + colors[key])
+    })
+  }
 
   return cssText
 }
@@ -24,13 +28,15 @@ import axios from 'axios'
 /**
  * 根据主色生成色值表
  */
-export const generateColors = (primary: any) => {
-  if (!primary) return
-  const colors = {
+export const generateColors = (primary: string) => {
+  if (!primary) return {}
+  const colors: Colors = {
     primary
   }
-  Object.keys(formula).forEach(key => {
-    const value = formula[key].replace(/primary/g, primary)
+  const fml: Colors = formula
+  type Keys = KeyOfMap<Colors>
+  Object.keys(fml).forEach((key: Keys) => {
+    const value = fml[key].replace(/primary/g, primary)
     colors[key] = '#' + rgbHex(color.convert(value))
   })
   return colors
@@ -40,7 +46,6 @@ export const generateColors = (primary: any) => {
  * 获取当前 element-plus 的默认样式表
  */
 const getOriginalStyle = async () => {
-  
   // const version = require('element-plus/package.json').version
   // const url = `https://unpkg.com/element-plus@${version}/dist/index.css`
   const url = `https://unpkg.com/element-plus@2.2.17/dist/index.css`
@@ -54,7 +59,7 @@ const getOriginalStyle = async () => {
  */
 const getStyleTemplate = (data: string) => {
   // element-plus 默认色值
-  const colorMap = {
+  const colorMap: Colors = {
     '#3a8ee6': 'shade-1',
     '#409eff': 'primary',
     '#53a8ff': 'light-1',
@@ -68,11 +73,12 @@ const getStyleTemplate = (data: string) => {
     '#ecf5ff': 'light-9'
   }
   // 根据默认色值为要替换的色值打上标记
-  Object.keys(colorMap).forEach(key => {
+  let result = data
+  Object.keys(colorMap).forEach((key) => {
     const value = colorMap[key]
-    data = data.replace(new RegExp(key, 'ig'), value)
+    result = data.replace(new RegExp(key, 'ig'), value)
   })
-  return data
+  return result
 }
 
 /**
@@ -80,7 +86,7 @@ const getStyleTemplate = (data: string) => {
  * @param {*} elNewStyle  element-plus 的新样式
  * @param {*} isNewStyleTag 是否生成新的 style 标签
  */
- export const writeNewStyle = (elNewStyle: any) => {
+export const writeNewStyle = (elNewStyle: any) => {
   const style = document.createElement('style')
   style.innerText = elNewStyle
   document.head.appendChild(style)

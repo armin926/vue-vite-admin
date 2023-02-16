@@ -21,8 +21,8 @@ export function setTimeStamp() {
  */
 export function isCheckTimeout() {
   // 当前时间戳
-  var currentTime = Date.now()
+  const currentTime = Date.now()
   // 缓存时间
-  var timeStamp = getTimeStamp()
+  const timeStamp = getTimeStamp()
   return currentTime - timeStamp > TOKEN_TIMEOUT_VALUE
 }
